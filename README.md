@@ -6,5 +6,5 @@ By using React, you can reuse prior web development knowledge to create mobile w
 
  Even though each platform uses different elements, such as ViewGroup in Android vs. UIView in iOS, you only need to write the code once in JavaScript.
  
-<img src="./multi-platform-button-v1.svg" height="500">
+<img src="./multi-platform-button-v1.svg" height="600">
 
