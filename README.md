@@ -7,6 +7,7 @@ All functionality of the React Native app must be included in a single React com
 
 By using React, you can reuse prior web development knowledge to create mobile with the native features of traditional mobile apps. It also allows developers to share most of the code on all platforms, resulting in faster development. But, to get from idea to app, basic knowledge of the native platforms is required.
 
+<<<<<<< HEAD
 Core Components
 Core components are ready-to-use components available from React Native, which include <View>, <Text>, <Image>, <ScrollView>, <Button>, and <TextInput>.
 
@@ -23,6 +24,11 @@ To visualize these two threads, consider a highway with only a single lane for t
 
 Besides the visible UI components, the native UI thread is also handling native API requests. Some functionality, like GPS location, needs to be requested from the native APIs. If your JS code uses this kind of functionality, it interacts with the native API using native code. The data from this native code is sent back to the JS code and handled in your app.
 <img src="./two-threads-v1.svg" height="600">
+=======
+ Even though each platform uses different elements, such as ViewGroup in Android vs. UIView in iOS, you only need to write the code once in JavaScript.
+ 
+<img src="./multi-platform-button-v1.svg" height="600">
+>>>>>>> 611ef800a881e85c986ffdba446275dcedf351f7
 
 React Native's drawback
 -Pure native apps have a higher performance ceiling compared to Expo and React Native apps.
