@@ -7,9 +7,9 @@ All functionality of the React Native app must be included in a single React com
 
 By using React, you can reuse prior web development knowledge to create mobile with the native features of traditional mobile apps. It also allows developers to share most of the code on all platforms, resulting in faster development. But, to get from idea to app, basic knowledge of the native platforms is required.
 
-<<<<<<< HEAD
 Core Components
-Core components are ready-to-use components available from React Native, which include <View>, <Text>, <Image>, <ScrollView>, <Button>, and <TextInput>.
+Core components are ready-to-use components available from React Native, which include <View>, <Text>, <Image>, <ScrollView>, <Button>, and <TextInput>. More =>[DOCS](https://reactnative.dev/docs/components-and-apis)
+<img src="./Exploded View of Components.svg" height="600">
 
 Native Components
 Native components are platform-backed components. These components are invoked with JavaScript using React components. At runtime, React Native creates the corresponding Android and iOS views.
@@ -24,13 +24,67 @@ To visualize these two threads, consider a highway with only a single lane for t
 
 Besides the visible UI components, the native UI thread is also handling native API requests. Some functionality, like GPS location, needs to be requested from the native APIs. If your JS code uses this kind of functionality, it interacts with the native API using native code. The data from this native code is sent back to the JS code and handled in your app.
 <img src="./two-threads-v1.svg" height="600">
-=======
- Even though each platform uses different elements, such as ViewGroup in Android vs. UIView in iOS, you only need to write the code once in JavaScript.
- 
-<img src="./multi-platform-button-v1.svg" height="600">
->>>>>>> 611ef800a881e85c986ffdba446275dcedf351f7
 
 React Native's drawback
 -Pure native apps have a higher performance ceiling compared to Expo and React Native apps.
 -React Native are abstractions on top of the native platform. They need to follow the latest changes and functionality from the native platforms.
 -Complex apps often require you to optimize and customize native code— that requires a good understanding of every platform you need to support.
+
+
+## Core components
+View component
+One of the most fundamental core components is the View component. With View, you can create responsive layouts using flexbox or add basic styling to nested components.
+
+The component is best comparable with a div HTML element. Just like div, the View component is not visible unless styling is applied. We can apply this styling through the style property.
+
+Instead of writing display: flex, all components are a flexbox by default. We can enable the flexbox behavior by using the flex property in our style object.
+
+React Native doesn’t use CSS. This method of styling is not available on native platforms. Instead of using CSS, we can write our styling using plain JavaScript objects. These objects use the same CSS properties but they are written in “camelCase”.
+
+Text component
+To render text on Android and iOS, the string needs to be wrapped in a Text component.
+
+Image component
+This content can be rendered in React Native using the Image component. It’s similar to the <img> HTML element, but the Image component has more features.
+One of the additional features of <Image> is the ability to load images from different sources. This could be a publicly accessible https:// link, local file:// reference, Base64-encoded string, or image imported as module with require. Each of the image sources has its own benefits.
+
+ScrollView component
+ScrollView allows us to fully manage and customize how the content should be scrolled.
+
+Button component
+To capture the user clicking the button, we need to use the onPress event handler.
+
+TextInput component
+The TextInput component is created to capture textual and numeric input. This component is best comparable with the <input> HTML element.
+To listen to input changes from the user, we can use the onChangeText event handler.
+TextInput has a lot of functionality, one of them is the secureTextEntry property.
+
+Combining components
+Custom reusable components
+
+
+## Accessibility in React Native
+Accessibility properties
+In React Native, we can add a textual description without actually displaying the text. This text helps accessibility readers communicate the action that will be performed when pressing the button. We can do that by defining the accessibility properties.  
+Without the text displayed, it will read out.
+
+```
+<TouchableOpacity
+  onPress={deleteItem}
+  accessible={true}
+  accessibilityLabel="Press to delete"
+  accessibilityHint="The item will be deleted permanently"
+>
+  <TrashIcon />
+</TouchableOpacity>
+```
+
+1. accessible -This property tells React Native to group the content into a single selectable component. When users tap the button, Android and iOS will select everything from the touchable opacity.
+2. accessibilityLabel - This describes how users can use the button. Accessibility readers will tell the user to “Press to delete”.
+3. accessibilityHint - This optional description tells users what will happen after pressing the button.
+
+Design
+Good high contrast
+
+ [Google accessibility tips](https://developers.google.com/billions)
+ [Other tips](https://www.youtube.com/watch?v=S3DzcCrEGbc)
