@@ -5,5 +5,6 @@ Instead of rendering this component to DOM, React Native renders it for you usin
 By using React, you can reuse prior web development knowledge to create mobile with the native features of traditional mobile apps. It also allows developers to share most of the code on all platforms, resulting in faster development. But, to get from idea to app, basic knowledge of the native platforms is required.
 
  Even though each platform uses different elements, such as ViewGroup in Android vs. UIView in iOS, you only need to write the code once in JavaScript.
+ 
 ![multi platform button](multi-platform-button-v1.svg  | height=100)
 
