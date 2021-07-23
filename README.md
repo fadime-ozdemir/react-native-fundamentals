@@ -8,7 +8,7 @@ All functionality of the React Native app must be included in a single React com
 By using React, you can reuse prior web development knowledge to create mobile with the native features of traditional mobile apps. It also allows developers to share most of the code on all platforms, resulting in faster development. But, to get from idea to app, basic knowledge of the native platforms is required.
 
 Core Components
-Core components are ready-to-use components available from React Native, which include <View>, <Text>, <Image>, <ScrollView>, <Button>, and <TextInput>. More =>[DOCS](https://reactnative.dev/docs/components-and-apis)
+Core components are ready-to-use components available from React Native, which include View, Text, Image, ScrollView, Button, and TextInput. More =>[DOCS](https://reactnative.dev/docs/components-and-apis)
 <img src="./Exploded View of Components.svg" height="600">
 
 Native Components
@@ -45,8 +45,8 @@ Text component
 To render text on Android and iOS, the string needs to be wrapped in a Text component.
 
 Image component
-This content can be rendered in React Native using the Image component. It’s similar to the <img> HTML element, but the Image component has more features.
-One of the additional features of <Image> is the ability to load images from different sources. This could be a publicly accessible https:// link, local file:// reference, Base64-encoded string, or image imported as module with require. Each of the image sources has its own benefits.
+This content can be rendered in React Native using the Image component. It’s similar to the img HTML element, but the Image component has more features.
+One of the additional features of Image is the ability to load images from different sources. This could be a publicly accessible https:// link, local file:// reference, Base64-encoded string, or image imported as module with require. Each of the image sources has its own benefits.
 
 ScrollView component
 ScrollView allows us to fully manage and customize how the content should be scrolled.
@@ -55,7 +55,7 @@ Button component
 To capture the user clicking the button, we need to use the onPress event handler.
 
 TextInput component
-The TextInput component is created to capture textual and numeric input. This component is best comparable with the <input> HTML element.
+The TextInput component is created to capture textual and numeric input. This component is best comparable with the input HTML element.
 To listen to input changes from the user, we can use the onChangeText event handler.
 TextInput has a lot of functionality, one of them is the secureTextEntry property.
 
@@ -88,3 +88,30 @@ Good high contrast
 
  [Google accessibility tips](https://developers.google.com/billions)
  [Other tips](https://www.youtube.com/watch?v=S3DzcCrEGbc)
+
+
+##STYLING
+In order to use React code and run them in a native environment, React Native uses a JavaScript thread. Since we are tied to JavaScript, we have to define our styling in JavaScript too.
+
+StyleSheets
+With the StyleSheet API, we can pull the inline styling from our components. By doing that we can reuse the styling rules.
+The most important method of the StyleSheet API is the .create method. With that, we can create a nested object with styling rules and refer to the styling rules.
+ome styling properties require objects instead of plain numbers or strings.
+shadowOffset is one of these properties: it requires an object with width and height.
+Using array with conditionally added styles, we can make the styling dynamic based on user interaction.
+
+Width and Height
+React Native doesn’t always use units, like pixels (px), when setting dimensions or font sizes. That’s because using pixels in mobile apps will cause a lot of deviations when running the app on older and newer devices.
+
+Older phones usually have screens with lower precision or pixels per inch. Lower precision means that the screen has fewer pixels available to control. When using pixels on older devices, you content might appear larger than intended compared to newer devices with higher precision.
+In mobile development, it’s common to use a different type of unit called “Density-independent Pixels” or dp. The dp unit takes the screen precision into account when setting the actual amount of pixels. This unit type is also the default unit for React Native when setting styling properties, such as height, width, and fontSize.
+
+Some styling properties, like width and height, also accept percentage values. This format doesn’t have the same pixel-related limitation because it’s a relative value. If you have a parent view with a total width of 500dp, using 50% is relative to these density-independent pixels.
+
+Flexbox
+By adding the flex property with a factor number, we tell React Native to distribute the available space by the factor provided. The height for each of our boxes is calculated by dividing the available space by the sum of factors used. In our case, that would be height / (1 + 1 + 1) * factor.
+You can also change the factor for one or two child elements. Doing so will increase the height of that element, and decrease the height of others.
+This happens because we increase the factor for that element.
+
+The flex: 1 child elements will receive height / (1 + 2 + 1) * 1, which is 25% of the available space.
+The flex: 2 child element will receive height / (1 + 2 + 1) * 2, which is 50% of the available space.

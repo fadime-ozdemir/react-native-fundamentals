@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Button, TextInput } from 'react-native';
+import { Pressable, StyleSheet, Text, View, Image, ScrollView, Button, TextInput } from 'react-native';
 const imageSRC = require("./multi-platform-button-v1.svg");
 
 export default function App() {
@@ -68,9 +68,29 @@ export default function App() {
     <Box color="green" />
     <Box color="blue" />
   </View>
+  <View style={styles.layout}>
+    <View style={styles.card} />
+    <View style={styles.card} />
+  </View>
+
+  <View style={styles.layout}>
+    <Pressable>
+      {(state) => <PressableBox pressed={state.pressed} />}
+    </Pressable>
+  </View>
+
     </ScrollView>
   );
 }
+
+
+export const Box = (props) => (
+    <View style={{ width: 100, height: 100, backgroundColor: props.color }} />
+  );
+  
+export const PressableBox = (props) => (
+  <View style={[styles.box, props.pressed && { backgroundColor: 'blue' }]} />
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -79,8 +99,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  layout: {
+    flex: 1,
+    backgroundColor: '#e5e5e5',
+    justifyContent: 'center',
+  },
+  card: {
+    width: 100, 
+    height: 100, 
+    backgroundColor: 'white', 
+    margin: 16, 
+    borderRadius: 2, 
+    shadowColor: 'black', 
+    shadowOpacity: 0.3, 
+    shadowRadius: 1, 
+    shadowOffset: { height: 1, width: 0.3 } 
+  },
 });
-
-export const Box = (props) => (
-    <View style={{ width: 100, height: 100, backgroundColor: props.color }} />
-  );
