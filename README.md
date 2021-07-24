@@ -115,3 +115,81 @@ This happens because we increase the factor for that element.
 
 The flex: 1 child elements will receive height / (1 + 2 + 1) * 1, which is 25% of the available space.
 The flex: 2 child element will receive height / (1 + 2 + 1) * 2, which is 50% of the available space.
+
+
+##Navigation
+3 different type of patterns:
+- Tab Navigation - This pattern uses a tab bar to allow users to switch between screens. Usually, these screens contain different functionality, like a home screen and a profile screen. There are more variants of the tab navigator, like Google’s Material Design (top) Tabs. The tabs usually contain the primary functionality of an app, like a feed and profile screen.
+
+- Stack Navigation - The second example is a stacked pattern. Instead of using a menu or tab bar, the user has to go from screen to screen to navigate through all screens. When a user navigates from one screen to another, the screen is pushed on a stack. The order of the stack doesn’t matter; every transition is another screen in the stack. However when going back a page, the last screen is removed from the stack and the previous screen is displayed. These stacks usually contain screens that are functional-related to each other, like a list of tasks and a task detail screen.
+
+- Drawer Navigation - Instead of using a tab bar, it uses a pane that can be opened by either swiping or opening a menu button. In this pane, there is a menu where the users can switch between screens. Like the tab bar pattern, these screens often contain the primary functionality of your app.
+<img src="./navigation-01.gif" alt="2-navs-patterns" height="500" />
+
+The concept of sketching out the navigational structure of your app is often referred to as **navigation hierarchy**. In its simplest form, you can draw the structure as a simple graph. Every node represents a screen, and the edges define how the user can navigate from screen to screen.
+
+In plain React, there is no concept of rendering different pages. It only renders the default entrypoint, which is just a single React component. This also applies to React Native. Everything in your app has to be handled within that single component. Managing transitions between multiple screens can be a complex task.
+
+One of the core principles of **react-navigation** is the navigator. It’s the fundamental structure that holds multiple screens of your app. The navigator determines what screen should render and how transitions between multiple screens are animated. All of the screens are identified and referred to by a unique name.
+
+react-navigation ships with a couple of different navigators, each following one of the navigational patterns you saw earlier:
+- Tab Navigator - Renders a tab menu where users can switch between multiple screens. These screens are only rendered when navigated to.
+- Stack Navigator - Renders a header with the screen title and optional back buttons when users navigate other screens.
+- Drawer Navigator - Renders a sidebar list menu where users can switch between multiple screens. Users can open the menu by swiping from the side of the screen.
+
+To refactor our app into screens, we have to define the current App content as a screen. We use the stack navigator for this single screen to get familiar with the concept of navigators.
+
+Navigators in react-navigation are created by a factory method. The stack navigator is created by the **createStackNavigator**. This method returns an object with a Navigator and Screen property. These properties are unique components that you have to use when rendering the screens.
+
+```
+const Stack = createStackNavigator();
+ 
+<Stack.Navigator>
+  <Stack.Screen name="MyScreen" component={MyScreen} />
+</Stack.Navigator>
+```
+
+Programmatic Navigation
+With the tab or drawer navigator, you get a customizable menu that users can use to navigate between screens. The stack navigator only adds a menu with the screen title and a back button once you navigate within the stack. To navigate to different screens within the stack, we have to implement our code to move users from one screen to another.
+Every screen receives a navigation property. This property is an object with a lot of useful methods, like .navigate('ScreenName') or .goBack().
+
+```
+// Using properties, only available in screen components
+const FeedScreen = (props) => {
+  const nav = props.navigation;
+ 
+  return (
+    <Button
+      title="Go to home"
+      onPress={() => nav.navigate('Home')}
+    />
+  );
+};
+```
+
+You can also access this navigation object using the useNavigation hook.
+```
+/ Using the hook, available in all components
+const HomeButton = () => {
+  const nav = useNavigation();
+ 
+  return (
+    <Button
+      title="Go to home"
+      onPress={() => nav.navigate('Home')}
+    />
+  );
+};
+```
+
+ We don’t have to use the stack navigator to interact with the navigation API - it works with all navigators. Navigating within a stack requires manual transitions because we don’t get a menu with the stack navigator.
+
+ Nested Navigation
+To help you structure more complex use cases, you can combine multiple navigators. Instead of rendering a screen, you can also render a navigator as a screen. Nesting navigators sounds simple, but you have to be careful when doing so. When rendering a stack navigator inside another stack navigator, you might get two headers on top. To fix that, you can customize or turn off the header in one stack navigator.
+
+EX.
+we want to add a stack navigator to the profile tab. Here, we show an overview screen and a settings screen. The settings screen shouldn’t be a tab on its own. By adding this stack navigator, we group the profile functionality under a single tab. It also adds a nice screen animation when users go to the settings screen and keeps the profile tab marked as active.
+<img src="./nested-navigation-v04.png" height="500"/>
+
+Authentication Flow
+Instead of using a stack navigator within a tab navigator, we will add a stack navigator as our first navigator.
